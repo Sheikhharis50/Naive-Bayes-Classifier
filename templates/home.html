@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    
+    <meta charset="utf-8">
+    <title>Naive Bayes Classifier - Harry</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/template.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light nb" >
+    <a class="navbar-brand" href="{{ url_for('home') }}">NBC: <b>Naive Bayes Classifier</b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav" style="border: 1px solid black; margin-left: 2%; padding-left: 1%; padding-right: 1%;">
+            <a class="nav-item nav-link active mu" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
+        </div>
+    </div>
+</nav>
+<br><br>
+<form action="/" method="post" role="form" autocomplete="off">
+    
+    <label class="in"><h3>Inputs</h3></label>
+    <div class="form-row">
+        <div class="col">
+            <input type="text" name="x" class="form-control" placeholder="Enter x">
+        </div>
+        <div class="col">
+            <input type="text" name="y" class="form-control" placeholder="Enter y">
+        </div>
+        <div class="col">
+            <input type="text" name="z" class="form-control" placeholder="Enter z">
+        </div>
+    </div>
+    <br>
+    <div class="form-row">
+        <div class="col sub">
+            <button type="submit" class="btn btn-primary" 
+                style="background-color: black; border-color: black;">
+                Submit
+            </button>
+        </div>
+    </div>
+</form>
+<br>
+{% if message %}
+    <div class="alert alert-info">
+        <p>
+        {%for i in range(message['cls']|length) %}
+            Class <b>{{ message['cls'][i] }}</b> have <b>{{ message['prob'][i]}}</b> probability<br>
+        {% endfor %}
+        Hence, <br>
+        Predicted Class is <b>{{ message['preclass'] }}</b> with highest probability <b>{{ message['preprob'] }}</b>
+        </p>
+        
+    </div>
+{% endif %}
+
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
