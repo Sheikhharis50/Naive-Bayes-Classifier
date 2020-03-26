@@ -52,8 +52,10 @@
     </div>
 </form>
 <br>
-{% if message %}
-    <div class="alert alert-info">
+
+    {% if status is defined and status is sameas true %}
+        {% if message %}
+        <div class="alert alert-info">
         <p>
         {%for i in range(message['cls']|length) %}
             Class <b>{{ message['cls'][i] }}</b> have <b>{{ message['prob'][i]}}</b> probability<br>
@@ -61,9 +63,18 @@
         Hence, <br>
         Predicted Class is <b>{{ message['preclass'] }}</b> with highest probability <b>{{ message['preprob'] }}</b>
         </p>
-        
-    </div>
-{% endif %}
+        </div>
+        {% endif %}
+    {% endif %}
+    {% if status is defined and status is sameas false %}
+        <div class="alert alert-warning">
+        <p>
+        <b>Error:</b> All Inputs should be Integer and Should Not be Empty!
+        </p>
+        </div>
+    {% endif %}
+    
+
 
 </div>
 

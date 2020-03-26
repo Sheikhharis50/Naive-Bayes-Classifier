@@ -64,7 +64,6 @@ def predictClass(x, y, z):
     for cl in classes.columns:
         result = findLikelihood(data, cl, vars)
         sms.create(cl, result)
-        #message += "Class "+cl+" has "+str(result)+" probability\n"
         if result > max: 
             max = result
             predictedClass = cl

@@ -13,21 +13,33 @@ class ReusableForm(Form):
     y = TextField('y:', validators=[validators.required()])
     z = TextField('z:', validators=[validators.required()])
 
-    @app.route("/", methods=['GET', 'POST'])
-    def home():
-        form = ReusableForm(request.form)
 
-        print (form.errors)
-        if request.method == 'POST':
-            x = request.form['x']
-            y = request.form['y']
-            z = request.form['z']
-            print (x, ", ", y, ", ", z)
-        sms = ''
-        if form.validate():
-            sms = nbc.predictClass(x, y, z)
-        
-        return render_template('home.html', form=form, message=sms)
+def checkValidation(var):
+    try:
+        val = int(var)
+        return val
+    except ValueError:
+        return None
+
+@app.route("/", methods=['GET', 'POST'])
+def home():
+    form = ReusableForm(request.form)
+
+    print (form.errors)
+    if request.method == 'POST':
+        x = checkValidation(request.form['x'])
+        y = checkValidation(request.form['y'])
+        z = checkValidation(request.form['z'])
+        if x == None or y == None or z == None:
+            return render_template('home.html', form=form, status=False)
+            
+    sms = ''
+    if form.validate():
+        sms = nbc.predictClass(x, y, z)
+    
+    return render_template('home.html', form=form, message=sms, status=True)
+    
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
